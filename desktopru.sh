@@ -4,18 +4,18 @@ mv /etc/pacman.conf /etc/pacman.conf.old
 echo "pacman.conf -> pacman.conf.old"
 cp pacman.conf /etc/pacman.conf
 pacman -Sy
-pacman -S git dmenu grub os-prober efibootmgr base-devel iwd firefox steam xorg xorg-xinit vim neovim dhcpcd pulseaudio pavucontrol ly openresolv toilet
+pacman -S git dmenu grub os-prober efibootmgr base-devel firefox steam xorg xorg-xinit vim neovim dhcpcd pulseaudio pavucontrol ly openresolv toilet
 echo "username:"
 read username
 useradd -m $username
 passwd $username
 echo "$username ALL=(ALL:ALL) ALL" >> /etc/sudoers
 systemctl enable ly
-systemctl enable iwd
 systemctl enable dhcpcd
+echo "ru_RU.UTF-8 UTF-8" >> /etc/locale.gen
 echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 locale-gen
-echo "LANG=en_US.UTF-8" >> /etc/locale.conf
+echo "LANG=ru_RU.UTF-8" >> /etc/locale.conf
 echo "hostname:"
 read hostname1
 echo $hostname1 >> /etc/hostname
@@ -24,6 +24,7 @@ git clone https://github.com/es1s/dwmmycfg /home/$username/git/dwm
 git clone https://aur.archlinux.org/paru.git /home/$username/git/paru
 echo "handle install dwm (make clean install), paru (makepkg -si) in homedir"
 echo "exec dwm" >> /home/$username/.xinitrc
+cp 00-ru-xorg-keybord /etc/X11/xorg.conf.d/00-keyboard.conf
 chmod +x /home/$username/.xinitrc
 chown $username:$username /home/$username/*
 chown $username:$username /home/$username/git/paru

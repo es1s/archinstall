@@ -12,10 +12,9 @@ passwd $username
 echo "$username ALL=(ALL:ALL) ALL" >> /etc/sudoers
 systemctl enable ly
 systemctl enable dhcpcd
-echo "ru_RU.UTF-8 UTF-8" >> /etc/locale.gen
 echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 locale-gen
-echo "LANG=ru_RU.UTF-8" >> /etc/locale.conf
+echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 echo "hostname:"
 read hostname1
 echo $hostname1 >> /etc/hostname
