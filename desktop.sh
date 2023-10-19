@@ -4,7 +4,7 @@ mv /etc/pacman.conf /etc/pacman.conf.old
 echo "pacman.conf -> pacman.conf.old"
 cp pacman.conf /etc/pacman.conf
 pacman -Sy
-pacman -S git grub os-prober efibootmgr base-devel firefox steam xorg xorg-xinit vim neovim dhcpcd pulseaudio pavucontrol ly openresolv toilet
+pacman -S git dmenu grub os-prober efibootmgr base-devel firefox steam xorg xorg-xinit vim neovim dhcpcd pulseaudio pavucontrol ly openresolv toilet
 echo "username:"
 read username
 useradd -m $username
@@ -24,6 +24,8 @@ git clone https://github.com/es1s/dwmmycfg /home/$username/git/dwm
 git clone https://aur.archlinux.org/paru.git /home/$username/git/paru
 echo "handle install dwm (make clean install), paru (makepkg -si) in homedir"
 echo "exec dwm" >> /home/$username/.xinitrc
+chmod +x /home/$username/.xinitrc
+chown $username:$username /home/$username/*
 chown $username:$username /home/$username/git/paru
 chown $username:$username /home/$username/git/dwm
 echo "disk for grub"
