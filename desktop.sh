@@ -4,7 +4,7 @@ mv /etc/pacman.conf /etc/pacman.conf.old
 echo "pacman.conf -> pacman.conf.old"
 cp pacman.conf /etc/pacman.conf
 pacman -Sy
-pacman -S git base-devel firefox steam xorg xorg-xinit vim neovim dhcpcd pulseaudio pavucontrol ly openresolv toilet
+pacman -S git grub os-prober efibootmgr base-devel firefox steam xorg xorg-xinit vim neovim dhcpcd pulseaudio pavucontrol ly openresolv toilet
 echo "username:"
 read username
 useradd -m $username
@@ -27,5 +27,10 @@ echo "exec dwm" >> /home/$username/.xinitrc
 echo "настройка xorg на русич"
 localectl --no-convert set-x11-keymap us,ru pc105 dvorak grp:alt_shift_toggle
 chown $username:$username /home/$username/*
+echo "диск на котором будет grub"
+read disk
+cp grub /etc/default/grub
+grub-install --efi-directory=/boot --boot-directory=/boot --bootloader-id=grub /dev/$disk
+grub-mkconfig -o /boot/grub/grub.cfg
 echo "Не добро пожаловать в ARCH"
 toilet "arch"
