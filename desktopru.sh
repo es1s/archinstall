@@ -35,10 +35,6 @@ grub-install --efi-directory=/boot --boot-directory=/boot --bootloader-id=grub /
 grub-mkconfig -o /boot/grub/grub.cfg
 cd /home/$username/git/dwm
 make clean install
-su - $username
-echo "Passwd your user (not root)"
-cd /home$username/git/paru
-makepkg -si
-paru -S cool-retro-term wps-office yandex-music-player 
+su - $username -c "cd /home/$username/git/paru; makepkg -si; paru -S cool-retro-term wps-office yandex-music-player"
 echo "Welcome to ARCH"
 toilet "arch"
