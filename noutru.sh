@@ -4,7 +4,7 @@ mv /etc/pacman.conf /etc/pacman.conf.old
 echo "pacman.conf -> pacman.conf.old"
 cp pacman.conf /etc/pacman.conf
 pacman -Sy
-pacman -S git dmenu grub os-prober efibootmgr base-devel iwd firefox steam xorg xorg-xinit vim neovim dhcpcd pulseaudio pavucontrol ly openresolv toilet
+pacman -S git dmenu grub os-prober efibootmgr base-devel iwd firefox steam xorg xorg-xinit vim neovim dhcpcd pulseaudio pavucontrol ly openresolv toilet rofi zsh neofetch nemo ttf-font-awesome feh 
 echo "username:"
 read username
 useradd -m $username
@@ -23,7 +23,6 @@ echo $hostname1 >> /etc/hostname
 mkdir /home/$username/git
 git clone https://github.com/es1s/dwmmycfg /home/$username/git/dwm
 git clone https://aur.archlinux.org/paru.git /home/$username/git/paru
-echo "handle install dwm (make clean install), paru (makepkg -si) in homedir"
 echo "exec dwm" >> /home/$username/.xinitrc
 cp 00-ru-xorg-keyboard /etc/X11/xorg.conf.d/00-keyboard.conf
 chmod +x /home/$username/.xinitrc
@@ -35,5 +34,12 @@ read disk
 cp grub /etc/default/grub
 grub-install --efi-directory=/boot --boot-directory=/boot --bootloader-id=grub /dev/$disk
 grub-mkconfig -o /boot/grub/grub.cfg
+cd /home/$username/git/dwm
+make clean install
+su - $username
+echo "Passwd your user (not root)"
+cd /home$username/git/paru
+makepkg -si
+paru -S cool-retro-term wps-office yandex-music-player 
 echo "Welcome to ARCH"
 toilet "arch"
